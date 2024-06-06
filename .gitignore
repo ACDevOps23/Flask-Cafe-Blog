@@ -8,7 +8,7 @@ pyvenv.cfg
 .DS_Store
 .idea
 FLASK_KEY
-SQLITE_DB
+SQLite_DB
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
