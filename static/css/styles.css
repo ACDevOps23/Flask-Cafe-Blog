@@ -1,0 +1,46 @@
+
+body {
+background-color: #333;
+overflow-x: hidden;
+color: white;
+
+}
+
+.main {
+  margin: 0;
+  color: white;
+  background-color: #333;
+}
+
+a {
+    color: black;
+}
+
+.navbar-brand {
+    float: none;
+    position: absolute;
+    display: flex;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.card-body {
+    color: black;
+    margin: 10px;
+    box-sizing: border-box;
+    display: block;
+}
+
+.search {
+    display: flex;
+    justify-content: center;
+
+}
+
+.flash {
+    display: flex;
+    justify-content: center;
+    color: red;
+}
+

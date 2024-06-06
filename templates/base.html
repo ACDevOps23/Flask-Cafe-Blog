@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <title>Caffe di Qualita</title>
+
+    {% block styles %}
+    {{ bootstrap.load_css() }}
+    {% from 'bootstrap5/form.html' import render_field %}
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}" />
+    {% endblock %}
+  </head>
+  <body>
+
+    <!-- Navigation bar-->
+   <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
+     <div class="brand">
+       <a class="navbar-brand px-lg-3" href="{{ url_for('home') }}"><h2>Caffe di Qualita</h2></a>
+      </div>
+  <button class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbar"
+          aria-controls="#navbar"
+          aria-expanded="false"
+          aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse justify-content-between" id="#navbar">
+    <ul class="navbar-nav mr-auto py-2 py-lg-0">
+      <li class="nav-item active">
+        <a class="nav-link px-lg-3 py-3 py-lg-4" href="{{ url_for('home') }}">Cafes</a>
+      </li>
+      {% if not current_user.is_authenticated: %}
+      <li class="nav-item">
+        <a class="nav-link px-lg-3 py-3 py-lg-4" href="{{ url_for('login') }}">Log in</a>
+      </li>
+      {% else: %}
+      <li class="nav-item">
+        <a class="nav-link px-lg-3 py-3 py-lg-4" href="{{ url_for('logout') }}">Log out</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link px-lg-3 py-3 py-lg-4" href="{{ url_for('add_cafe') }}">Add</a>
+      </li>
+      {% endif %}
+      <li class="nav-item">
+        <a class="nav-link px-lg-3 py-3 py-lg-4" href="{{ url_for('about') }}">About</a>
+      </li>
+    </ul>
+      <form class="form-inline px-lg-3 my-2 my-lg-0" action="{{ url_for('search_cafe') }}" method="post">
+      <div class="row">
+        <div class="col">
+           <input class="form-control mr-sm-2" type="search" name="search" placeholder="Cafe Location..">
+        </div>
+        <div class="col-auto">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </div>
+      </div>
+    </form>
+  </div>
+    </nav>
+  </body>
+</html>

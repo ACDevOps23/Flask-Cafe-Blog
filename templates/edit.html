@@ -1,0 +1,34 @@
+{% include 'base.html' %}
+{% block content %}
+
+<header class="main text-center">
+    <div class="container">
+        <h1 class="display-4 text-center py-4">Cafes</h1>
+    </div>
+</header>
+
+<div class="align row row-cols-1 row-cols-md-2 g-4">
+    {% for cafe in cafes: %}
+    <div class="cafe_list list-group d-inline-flex">
+        <a href="{{ url_for('edit_cafes', cafe_id=cafe.id) }}" class="list-group-item list-group-item-action flex-column align-items-start">
+            <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1">{{ cafe.name }}</h5>
+                <img class="cafe_img" src="{{ cafe.img_url }}" height="150", width="200" alt="cafe.."/>
+                <small class="text-muted">3 days ago</small>
+            </div>
+
+            <ul class="mb-2">
+                <li>Location: {{ cafe.location }} <a href="{{ cafe.map_url }}">Google Maps</a></li>
+                <li>Price: {{ cafe.coffee_price}}</li>
+                <li>Seats: {{ cafe.seats }}</li>
+                <li>Toilets: {{ cafe.has_toilet }}</li>
+                <li>Wifi: {{ cafe.has_wifi }}</li>
+                <li>Sockets: {{ cafe.has_sockets }}</li>
+                <li>Calls: {{ cafe.can_take_calls }}</li>
+            </ul>
+        </a>
+        {% endfor %}
+    </div>
+</div>
+
+{% include "footer.html" %}{% endblock %}

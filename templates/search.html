@@ -1,0 +1,52 @@
+{% include 'base.html' %}
+{% block content %}
+<header class="main text-center">
+    {% if search: %}
+    <div class="container">
+        <h1 class="display-4 text-center py-4">Cafes in {{ search[0].location }}</h1>
+    </div>
+    {% endif %}
+</header>
+
+<div class="container display-2 text-center py-5">
+    {% with validation = get_flashed_messages() %}
+        {% if validation: %}
+            {% for error in validation: %}
+                <p class="flash">{{ error }}</p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+</div>
+
+<div class="cafes container">
+<div class="row row-cols-1 row-cols-md-2 g-5 justify-content-center">
+    {% for cafe in search: %}
+  <div class="col mb-4">
+    <div class="card" style=" width: 35rem;">
+      <img src="{{ cafe.img_url }}" class="card-img-top" height="290" alt="cafe..">
+      <div class="card-body">
+        <h5 class="card-title"><a href="{{ cafe.map_url }}">{{ cafe.name }}</a></h5>
+        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+      </div>
+        <ul class="list-group list-group-flush mb-1">
+            <li class="list-group-item">Locations: {{ cafe.location }}</li>
+            <li class="list-group-item">Price: {{ cafe.coffee_price}}</li>
+            <li class="list-group-item">Seats: {{ cafe.seats }}</li>
+            <li class="list-group-item">Toilets: {{ cafe.has_toilet }}</li>
+            <li class="list-group-item">Wifi: {{ cafe.has_wifi }}</li>
+            <li class="list-group-item">Sockets: {{ cafe.has_sockets }}</li>
+            <li class="list-group-item">Calls: {{ cafe.can_take_calls }}</li>
+        </ul>
+        <div class="card-body">
+            <a href="{{ url_for('add_cafe') }}" class="btn btn-outline-dark{% if not current_user.is_authenticated %} disabled{% endif %}">Add Cafe</a>
+            <a href="{{url_for('edit_cafes', cafe_id=cafe.id) }}" class="btn btn-outline-dark{% if not current_user.is_authenticated %} disabled{% endif %}">Edit Cafe</a>
+            <a href="" class="btn btn-outline-dark{% if not current_user.is_authenticated %} disabled{% endif %}">Delete Cafe</a>
+        </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+    </div>
+
+</div>
+{% include "footer.html" %}{% endblock %}
